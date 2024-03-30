@@ -1,34 +1,36 @@
 package com.example.projectsagarbhat
 
-import android.animation.ValueAnimator
+
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.concurrent.thread
+import android.animation.ValueAnimator
 
+/**
+ * SplashActivity to display a splash screen while loading the main activity.
+ */
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Enable edge-to-edge display for immersive experience
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
-       /* ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
-        var splashScreenText = findViewById<TextView>(R.id.textViewTimer)
 
+        // Find TextView for displaying countdown
+        val splashScreenText = findViewById<TextView>(R.id.textViewTimer)
+
+        // Coroutine to update countdown text every second
         GlobalScope.launch {
-            for (i in 1..5){
+            for (i in 1..5) {
                 delay(1000)
                 launch(Dispatchers.Main) {
                     splashScreenText.text = i.toString()
@@ -36,15 +38,18 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
+        // Thread to delay splash screen for 5 seconds before starting main activity
         thread {
             Thread.sleep(5000)
-            var mainIntent = Intent(this, MainActivity::class.java)
+            val mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(mainIntent)
+            finish()
         }
-        var progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        // Set max progress of the progress bar
-        progressBar.max = 100
 
+        // Find ProgressBar for showing progress animation
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+        // Function to start progress bar animation
         fun startProgressBarAnimation() {
             // Create a ValueAnimator for animating the progress
             val animator = ValueAnimator.ofInt(0, 100).apply {
@@ -56,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
             // Start the animator
             animator.start()
         }
-        startProgressBarAnimation()
+        startProgressBarAnimation() // Start progress bar animation
     }
-    }
+}
 

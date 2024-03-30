@@ -12,49 +12,60 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Dashboard activity responsible for displaying image data.
+ */
 class Dashboard : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Enable edge-to-edge display for immersive experience
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
+
+        // Apply window insets to adjust padding to accommodate system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val recycleView = findViewById<RecyclerView>(R.id.recyclerViewDisplayImageData)
-        recycleView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        var myApiData = ArrayList<Images>()
 
+        // Initialize RecyclerView
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewDisplayImageData)
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
+        // Initialize list to hold image data
+        val myApiData = ArrayList<Images>()
+
+        // Add a placeholder image for testing
         myApiData.add(Images(1,"Sagar", "https://via.placeholder.com/600/92c952"))
 
+        // Initialize RecyclerView adapter with initial data
+        val recyclerViewAdapter = ImageAdapter(myApiData)
+        recyclerView.adapter = recyclerViewAdapter
 
-        var recycleViewAdapter = ImageAdapter(myApiData)
-        recycleView.adapter = recycleViewAdapter
-
-        var apiCall = ApiClientImage.retrofitBuilder.getData()
-
-        apiCall.enqueue(object : Callback<List<Images>>{
+        // Make API call to fetch image data
+        val apiCall = ApiClientImage.retrofitBuilder.getData()
+        apiCall.enqueue(object : Callback<List<Images>> {
             override fun onResponse(
                 call: Call<List<Images>>,
                 response: Response<List<Images>>
             ) {
-                var products: List<Images>? = response.body()
-                Log.i("products", "$products")
-                if (products != null){
+                val images: List<Images>? = response.body()
+                Log.i("images", "$images")
+                if (images != null) {
+                    // Update list with fetched image data
                     myApiData.clear()
-                    myApiData.addAll(products)
-                    recycleViewAdapter.notifyDataSetChanged()
+                    myApiData.addAll(images)
+                    recyclerViewAdapter.notifyDataSetChanged()
                 }
             }
 
             override fun onFailure(call: Call<List<Images>>, t: Throwable) {
-                Log.i("api_error", "Error in api ${t.toString()}")
+                // Log error message if API call fails
+                Log.i("api_error", "Error in API: ${t.toString()}")
             }
         })
-
     }
 }
-
 

@@ -8,50 +8,52 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * SignUpActivity for user registration.
+ */
 class SignUpActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Enable edge-to-edge display for immersive experience
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
-        var usernameEditText = findViewById<EditText>(R.id.editTextUsername1)
-        var passwordEditText = findViewById<EditText>(R.id.editTextPassword1)
-        var AgeEditText = findViewById<EditText>(R.id.editTextAge)
-        var FullNameEditText = findViewById<EditText>(R.id.editTextFullName)
-        var db = Room.databaseBuilder(this,MyDB::class.java,"mydatabase")
+
+        // Initialize UI elements
+        val usernameEditText = findViewById<EditText>(R.id.editTextUsername1)
+        val passwordEditText = findViewById<EditText>(R.id.editTextPassword1)
+        val ageEditText = findViewById<EditText>(R.id.editTextAge)
+        val fullNameEditText = findViewById<EditText>(R.id.editTextFullName)
+        val submitButton = findViewById<Button>(R.id.buttonSubmit)
+        val db = Room.databaseBuilder(this, MyDB::class.java, "mydatabase")
             .fallbackToDestructiveMigration().build()
-        var myIntent2 = Intent(this,MainActivity::class.java)
-        var h = Handler()
+        val myIntent2 = Intent(this, MainActivity::class.java)
+        val handler = Handler()
 
-
-        var submitButton = findViewById<Button>(R.id.buttonSubmit)
-        submitButton.setOnClickListener{
-            var myUsername = usernameEditText.text.toString()
-            var myPassword = passwordEditText.text.toString()
-            var myAge = AgeEditText.text.toString()
-            var myFullName = FullNameEditText.text.toString()
-
+        // Set click listener for submit button
+        submitButton.setOnClickListener {
+            // Retrieve user input data
+            val myUsername = usernameEditText.text.toString()
+            val myPassword = passwordEditText.text.toString()
+            val myAge = ageEditText.text.toString()
+            val myFullName = fullNameEditText.text.toString()
 
             GlobalScope.launch {
-                var data: List<MyEntity>? = db.myDao().readData()
-                var users = MyEntity()
-                users.myUsername = myUsername
-                users.myPassword = myPassword
-                users.myAge = myAge
-                users.myFullName = myFullName
-                var check: Int = 1
+                // Check if username already exists in the database
+                val data: List<MyEntity>? = db.myDao().readData()
+                val users = MyEntity().apply {
+                    this.myUsername = myUsername
+                    this.myPassword = myPassword
+                    this.myAge = myAge
+                    this.myFullName = myFullName
+                }
+                var check = 1
                 if (data == null) {
-                    h.post {
+                    handler.post {
                         Toast.makeText(
                             this@SignUpActivity,
                             "Please Enter valid data",
@@ -65,21 +67,34 @@ class SignUpActivity : AppCompatActivity() {
                         }
                     }
                 }
+                // Insert user data into the database if username is unique
                 if (check == 1) {
                     db.myDao().saveData(users)
-                    h.post{Toast.makeText(this@SignUpActivity,"Details Submitted",Toast.LENGTH_LONG).show()}
+                    handler.post {
+                        Toast.makeText(
+                            this@SignUpActivity,
+                            "Details Submitted",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                     startActivity(myIntent2)
                 } else {
-                    h.post{Toast.makeText(this@SignUpActivity,"Username is already taken",Toast.LENGTH_LONG).show()}
-
+                    handler.post {
+                        Toast.makeText(
+                            this@SignUpActivity,
+                            "Username is already taken",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
+
+            // Clear input fields after submission
             usernameEditText.setText("")
             passwordEditText.setText("")
-            AgeEditText.setText("")
-            FullNameEditText.setText("")
-
-        }
-
+            ageEditText.setText("")
+            fullNameEditText.setText("")
         }
     }
+}
+
