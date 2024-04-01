@@ -38,7 +38,7 @@ class Dashboard : AppCompatActivity() {
         val myApiData = ArrayList<Images>()
 
         // Add a placeholder image for testing
-        myApiData.add(Images(1,"Sagar", "https://via.placeholder.com/600/92c952"))
+        //myApiData.add(Images(1,"Sagar", "https://via.placeholder.com/600/92c952"))
 
         // Initialize RecyclerView adapter with initial data
         val recyclerViewAdapter = ImageAdapter(myApiData)
