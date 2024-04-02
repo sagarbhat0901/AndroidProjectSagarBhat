@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/gradient_background_dashboard"
     tools:context=".Dashboard">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,11 +14,12 @@
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="226dp"
-        android:background="@drawable/gradient_background"
+        android:background="@drawable/gradient_toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/textViewDashboardWelcomeUser"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,7 +27,7 @@
             android:id="@+id/imageView"
             android:layout_width="99dp"
             android:layout_height="match_parent"
-            android:background="#256395"
+            android:background="#FF9800"
             android:padding="0dp"
             app:srcCompat="@drawable/dashboardlogo2"
             tools:layout_editor_absoluteX="0dp"
@@ -58,8 +59,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDisplayImageData"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="348dp"
+        android:layout_height="529dp"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="37dp"
         android:foregroundGravity="center_horizontal"

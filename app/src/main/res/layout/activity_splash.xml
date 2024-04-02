@@ -5,35 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#448547"
+    android:background="@drawable/gradient_details"
     tools:context=".SplashActivity">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="318dp"
-        android:layout_height="184dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="273dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTimer"
+        android:layout_width="262dp"
+        android:layout_height="187dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="314dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimer"
         app:srcCompat="@drawable/splashscreen" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="33dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTimer">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <TextView
             android:id="@+id/textView2"
@@ -52,14 +51,18 @@
 
     <TextView
         android:id="@+id/textViewTimer"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="23dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="71dp"
         android:text="@string/_0"
         android:textColor="#BF502D"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
