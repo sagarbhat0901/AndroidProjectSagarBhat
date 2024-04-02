@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Coroutine to update countdown text every second
         GlobalScope.launch {
-            for (i in 1..5) {
+            for (i in 3 downTo 1) {
                 delay(1000)
                 launch(Dispatchers.Main) {
                     splashScreenText.text = i.toString()

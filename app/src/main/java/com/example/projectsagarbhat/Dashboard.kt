@@ -2,8 +2,11 @@ package com.example.projectsagarbhat
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +32,12 @@ class Dashboard : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        val toolbar_dashboard= findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar_dashboard)
+
+
 
         // Initialize RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewDisplayImageData)
@@ -65,7 +74,20 @@ class Dashboard : AppCompatActivity() {
                 // Log error message if API call fails
                 Log.i("api_error", "Error in API: ${t.toString()}")
             }
+
         })
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_logout -> finish()
+            R.id.action_exit -> finishAffinity()
+        }
+        return true
     }
 }
 
