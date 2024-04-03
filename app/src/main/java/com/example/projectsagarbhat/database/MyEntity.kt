@@ -1,4 +1,4 @@
-package com.example.projectsagarbhat
+package com.example.projectsagarbhat.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

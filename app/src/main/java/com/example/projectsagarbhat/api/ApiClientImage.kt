@@ -1,6 +1,7 @@
-package com.example.projectsagarbhat
+package com.example.projectsagarbhat.api
 
 
+import com.example.projectsagarbhat.adapter.Images
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

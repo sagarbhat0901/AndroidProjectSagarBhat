@@ -1,4 +1,4 @@
-package com.example.projectsagarbhat
+package com.example.projectsagarbhat.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.example.projectsagarbhat
+package com.example.projectsagarbhat.adapter
 
 /**
  * Data class representing an image.

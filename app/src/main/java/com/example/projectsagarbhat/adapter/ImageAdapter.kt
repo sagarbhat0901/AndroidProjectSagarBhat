@@ -1,4 +1,4 @@
-package com.example.projectsagarbhat
+package com.example.projectsagarbhat.adapter
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projectsagarbhat.DetailsActivity
+import com.example.projectsagarbhat.R
 import com.squareup.picasso.Picasso
 
 /**
